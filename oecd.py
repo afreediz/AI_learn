@@ -4,8 +4,8 @@ import pandas as pd
 import sklearn.linear_model
 import time
 
-oecd_bli = pd.read_csv("oecd_bli_2015.csv", thousands=",")
-gdp_per_capita = pd.read_csv("gdp_per_capita.csv", thousands=",", delimiter="\t", encoding="latin1", na_values="n/a")
+oecd_bli = pd.read_csv("./datasets/oecd_bli_2015.csv", thousands=",")
+gdp_per_capita = pd.read_csv("./datasets/gdp_per_capita.csv", thousands=",", delimiter="\t", encoding="latin1", na_values="n/a")
 
 def prepare_country_stats(oecd_bli, gdp_per_capita):
     oecd_bli = oecd_bli[oecd_bli["INEQUALITY"]=="TOT"]
