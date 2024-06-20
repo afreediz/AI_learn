@@ -34,4 +34,20 @@ model = sklearn.linear_model.LinearRegression()
 
 model.fit(X, y)
 
+
+# Generating predictions
+X_pred = np.linspace(np.min(X), np.max(X), 100).reshape(-1, 1)  # Generate points for predictions
+y_pred = model.predict(X_pred)
+
+# Plotting the model line
+plt.plot(X_pred, y_pred, color='red', linewidth=2, label='Linear Regression Model')
+
+# Enhance plot with labels, title, etc.
+plt.xlabel('GDP per capita')
+plt.ylabel('Life satisfaction')
+plt.title('Linear Regression Model')
+plt.legend()
+
+plt.show()
+
 print(model.predict([[22587]]))
