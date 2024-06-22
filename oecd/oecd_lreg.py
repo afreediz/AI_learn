@@ -1,11 +1,18 @@
+import os
 import numpy as np
 import pandas as pd
-import sklearn.neighbors
+import sklearn.linear_model
 import matplotlib.pyplot as plt
+from utils.utils import save_model
+
+current_dir = os.path.dirname(__file__)
+
+oecd_bli_path = os.path.join(current_dir, "../datasets/oecd_bli_2015.csv")
+gdp_per_capita_path = os.path.join(current_dir, "../datasets/gdp_per_capita.csv")
 
 # Read OECD Better Life Index (BLI) and GDP per capita data
-oecd_bli = pd.read_csv("./datasets/oecd_bli_2015.csv", thousands=",")
-gdp_per_capita = pd.read_csv("./datasets/gdp_per_capita.csv", thousands=",", delimiter="\t", encoding="latin1", na_values="n/a")
+oecd_bli = pd.read_csv(oecd_bli_path, thousands=",")
+gdp_per_capita = pd.read_csv(gdp_per_capita_path, thousands=",", delimiter="\t", encoding="latin1", na_values="n/a")
 
 def prepare_country_stats(oecd_bli, gdp_per_capita):
     # Filter and pivot OECD BLI data
@@ -44,15 +51,17 @@ plt.figure(figsize=(10, 6))
 plt.scatter(X, y, color='blue', label='Data points')
 
 # Create and fit the linear regression model
-model = sklearn.neighbors.KNeighborsRegressor(n_neighbors=3)
+model = sklearn.linear_model.LinearRegression()
 model.fit(X, y)
+
+save_model(model, filename="lreg_model.pkl")
 
 # Generate predictions
 X_pred = np.linspace(np.min(X), np.max(X), 100).reshape(-1, 1)  # Generate points for predictions
 y_pred = model.predict(X_pred)
 
 # Plot the model line
-plt.plot(X_pred, y_pred, color='red', linewidth=2, label='K-Nearest Neighbors Regression Model')
+plt.plot(X_pred, y_pred, color='red', linewidth=2, label='Linear Regression Model')
 
 # Enhance plot with labels, title, legend, etc.
 plt.xlabel('GDP per capita')
@@ -63,6 +72,9 @@ plt.legend(title="Linerar Regression Model")
 # Show plot
 plt.grid(True)
 plt.show()
+
+def make_pred(data):
+    return model.predict(data)
 
 # Example prediction
 print(model.predict([[22587]]))
