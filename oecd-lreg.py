@@ -58,7 +58,7 @@ plt.plot(X_pred, y_pred, color='red', linewidth=2, label='Linear Regression Mode
 plt.xlabel('GDP per capita')
 plt.ylabel('Life satisfaction')
 plt.title('Linear Regression Model')
-plt.legend()
+plt.legend(title="Linerar Regression Model")
 
 # Show plot
 plt.grid(True)
