@@ -2,6 +2,7 @@ import os
 import requests
 import json
 import pickle
+import pandas as pd
 
 current_dir = os.path.dirname(__file__)
 
@@ -15,9 +16,14 @@ def get_data_web(url, is_json:False, save_path=None):
             f.write(str(data))
     return data
 
-def save_pred(data, path="../predictions/", filename="pred.csv"):
+def save_pred(data, path="../predictions/", filename="pred.csv", type="csv"):
     save_path = os.path.join(current_dir, path)
     file_path = os.path.join(save_path, filename)
+
+    if(type == "csv"):
+        data.to_csv(file_path)
+        print('saving to ', file_path)
+        return
 
     with open(file_path, 'w') as f:
         f.write(str(data))

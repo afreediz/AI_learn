@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import sklearn.linear_model
 import matplotlib.pyplot as plt
-from utils.utils import save_model
+from utils.utils import save_model, save_pred
 
 current_dir = os.path.dirname(__file__)
 
@@ -39,8 +39,6 @@ def prepare_country_stats(oecd_bli, gdp_per_capita):
 # Prepare country stats
 country_stats = prepare_country_stats(oecd_bli, gdp_per_capita)
 
-# Save country stats to CSV
-country_stats.to_csv("country_stats.csv", index=False)
 
 # Extract features (GDP per capita) and target variable (Life satisfaction)
 X = np.c_[country_stats["GDP per capita"]]
