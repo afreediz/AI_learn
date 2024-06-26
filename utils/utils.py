@@ -31,5 +31,7 @@ def fetch_housing_data(housing_url):
     os.remove(tgz_path)
 
 
+
+
 # file retrieved is in csv format, no need of unnzip.
 fetch_housing_data(housing_url)
