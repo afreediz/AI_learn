@@ -12,7 +12,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.base import BaseEstimator, TransformerMixin
 
 def load_housing_data():
-    csv_path = os.path.join("../datasets", "housing", "housing.csv")
+    csv_path = os.path.join("housing.csv")
     return pd.read_csv(csv_path)
 
 housing = load_housing_data()
